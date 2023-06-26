@@ -1,0 +1,157 @@
+
+.heading{
+  margin-left: 32rem;
+}
+
+
+.player-list-container {
+  margin: 5%;
+
+  /* Styles for larger screens */
+  @media (min-width: 768px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2rem;
+  }
+}
+
+.member-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.member-list li {
+  margin-top: 0.5rem;
+}
+
+.selected-members-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.selected-members-list li {
+  margin-top: 0.5rem;
+}
+
+.add-button,
+.remove-button {
+  background-color: green;
+  color: white;
+  border: none;
+  width: 3rem;
+  cursor: pointer;
+  margin-left: 0.7rem;
+}
+
+.remove-button {
+  background-color: red;
+  width: 5rem;
+}
+
+.navigate-button-container {
+  margin-top: 2rem;
+}
+
+.navigate-button {
+  background-color: violet;
+  border: 2px solid violet;
+  color: black;
+  font-weight: 900;
+  cursor: pointer;
+  width: 100%;
+}
+
+.team-selector-container {
+  margin: 5%;
+}
+
+.selected-players-container {
+  margin-left: 36%;
+}
+
+.selected-players-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.selected-players-container li {
+  margin-top: 0.5rem;
+}
+
+.active {
+  background-color: green;
+  color: white;
+  border: none;
+  /* width: 100%; */
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.disable {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+.teams {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.team {
+  flex: 1 1 45%;
+  margin-bottom: 2rem;
+}
+
+.team h2 {
+  margin-bottom: 1rem;
+}
+
+.team ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.team li {
+  margin-bottom: 0.5rem;
+}
+
+.teams-table {
+  margin-top: 2rem;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.teams-table th,
+.teams-table td {
+  border: 1px solid black;
+  padding: 0.5rem;
+}
+
+.teams-table th {
+  background-color: #cbc3e3;
+  text-align: center;
+}
+
+.teams-table ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  .selected-players-container {
+    margin-left: 0;
+  }
+  .heading{
+    margin-left: 5rem;
+  }
+
+  .teams {
+    flex-direction: column;
+  }
+
+  .team {
+    flex: none;
+  }
+}

@@ -1,0 +1,97 @@
+import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
+import "../App.css";
+
+const TeamSelector = () => {
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [team1Members, setTeam1Members] = useState([]);
+  const [team2Members, setTeam2Members] = useState([]);
+
+  const Members = useLocation();
+  const selectedMembers = Members.state.selectedMembers;
+
+  function shuffleArray(array) {
+    const shuffledArray = [...array];
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [
+        shuffledArray[j],
+        shuffledArray[i],
+      ];
+    }
+    return shuffledArray;
+  }
+
+  const assignTeams = () => {
+ setIsDisabled(true);
+    const shuffledMembers = shuffleArray(selectedMembers);
+    const sortedMembers = shuffledMembers.sort((a, b) => b.points - a.points);
+
+    let team1Points = 0;
+    let team2Points = 0;
+
+    sortedMembers.forEach((member) => {
+      if (team1Points <= team2Points) {
+        setTeam1Members((prevMembers) => [...prevMembers, member]);
+        team1Points += member.points;
+      } else {
+        setTeam2Members((prevMembers) => [...prevMembers, member]);
+        team2Points += member.points;
+      }
+    });
+  };
+
+  return (
+    <div className="team-selector-container">
+      <div className="selected-players-container">
+        <h3>Selected players</h3>
+        <ul>
+          {selectedMembers.map((member) => (
+            <li key={member.id}>{member.name}</li>
+          ))}
+        </ul>
+       <button
+          className={` ${!isDisabled ? "active" : "disable"}`}
+          disabled={isDisabled}
+          onClick={assignTeams}
+        >
+          Assign Players
+        </button>
+      </div>
+      <table className="teams-table">
+        <thead>
+          <tr>
+            <th>Team 1</th>
+            <th>Team 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          {team1Members.length > 0 || team2Members.length > 0 ? (
+            <tr>
+              <td style={{textAlign:'center'}}>
+                <ul>
+                  {team1Members.map((member) => (
+                      <li key={member.id}>{member.name}</li>
+                  ))}
+                </ul>
+              </td>
+              <td style={{textAlign:'center'}}>
+                <ul>
+                  {team2Members.map((member) => (
+                    <li key={member.id}>{member.name}</li>
+                  ))}
+                </ul>
+              </td>
+            </tr>
+          ) : (
+            <tr>
+              <td colSpan="2">Teams will be assigned once players are selected and assigned</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+export default TeamSelector;

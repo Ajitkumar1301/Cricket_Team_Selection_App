@@ -1,0 +1,88 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+const PlayerList = () => {
+  const teamMembers = [
+    { id: 1, name: "Ajith", points: 2 },
+    { id: 2, name: "AproseKhan", points: 2 },
+    { id: 3, name: "Ashwathaman", points: 2 },
+    { id: 4, name: "Chandru", points: 2 },
+    { id: 5, name: "Daniel", points: 3 },
+    { id: 6, name: "Deepak", points: 2 },
+    { id: 7, name: "Giridharan", points: 2 },
+    { id: 8, name: "Jeffrin", points: 2 },
+    { id: 9, name: "Jones", points: 2 },
+    { id: 10, name: "KumarSelvam", points: 2 },
+    { id: 11, name: "MuraliK", points: 3 },
+    { id: 12, name: "Naveen", points: 2 },
+    { id: 13, name: "Nirmal", points: 3 },
+    { id: 14, name: "Prabhakaran", points: 3 },
+    { id: 15, name: "Pravin", points: 2 },
+    { id: 16, name: "Sakthivel", points: 2 },
+    { id: 17, name: "Sarath", points: 3 },
+    { id: 18, name: "Selvendran", points: 3 },
+    { id: 19, name: "Sikkandar", points: 3 },
+    { id: 20, name: "SivaDurai", points: 3 },
+    { id: 21, name: "ThiruVarasan", points: 2 },
+    { id: 22, name: "VelMurugan", points: 3 },
+    { id: 23, name: "Vignesh", points: 2 },
+  ];
+
+  const [selectedMembers, setSelectedMembers] = useState([]);
+  const navigate = useNavigate();
+
+  const handleSelectMember = (member) => {
+    if (selectedMembers.find((m) => m.id === member.id)) {
+      setSelectedMembers((prevMembers) =>
+        prevMembers.filter((m) => m.id !== member.id)
+      );
+    } else {
+      setSelectedMembers((prevMembers) => [...prevMembers, member]);
+    }
+  };
+
+  const handleNavigate = () => {
+    navigate("/Team", { state: { selectedMembers: selectedMembers } });
+  };
+
+  return (
+    <div style={{ marginLeft: "5%", marginRight: "5%", marginTop: "2rem" }}>
+      <div>
+        <h2>Team Members</h2>
+        <ul>
+          {teamMembers.map((member) => (
+            <li style={{ marginTop: "0.5rem" }} key={member.id}>
+                <input
+                  style={{ marginLeft: "1rem" }}
+                  type="checkbox"
+                  checked={selectedMembers.some((m) => m.id === member.id)}
+                  onChange={() => handleSelectMember(member)}
+                />
+              <label>
+                {member.name}
+              
+              </label>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div style={{ marginTop: "2rem" }}>
+        <button
+          style={{
+            backgroundColor: "red",
+            border: "2px solid red",
+            color: "gold",
+            cursor: "pointer",
+            width: "100%",
+          }}
+          onClick={handleNavigate}
+        >
+          Team Select
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default PlayerList;
