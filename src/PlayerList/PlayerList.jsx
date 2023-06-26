@@ -42,7 +42,7 @@ const PlayerList = () => {
   };
 
   const handleNavigate = () => {
-    navigate("/Team", { state: { selectedMembers: selectedMembers } });
+    navigate("/team", { state: { selectedMembers: selectedMembers } });
   };
 
   return (
