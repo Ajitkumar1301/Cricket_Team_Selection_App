@@ -49,32 +49,43 @@ const PlayerList = () => {
     <div style={{ marginLeft: "5%", marginRight: "5%", marginTop: "2rem" }}>
       <div>
         <h2>Team Members</h2>
-        <ul>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(2, 1fr)",
+            gap: "0.5rem",
+          }}
+        >
           {teamMembers.map((member) => (
-            <li style={{ marginTop: "0.5rem" }} key={member.id}>
-                <input
-                  style={{ marginLeft: "1rem" }}
-                  type="checkbox"
-                  checked={selectedMembers.some((m) => m.id === member.id)}
-                  onChange={() => handleSelectMember(member)}
-                />
-              <label>
-                {member.name}
-              
-              </label>
-            </li>
+            <div
+              key={member.id}
+              style={{
+                display: "flex",
+                alignItems: "center",
+             
+              }}
+            >
+              <input
+                style={{ marginLeft: "1rem" }}
+                type="checkbox"
+                checked={selectedMembers.some((m) => m.id === member.id)}
+                onChange={() => handleSelectMember(member)}
+              />
+              <label>{member.name}</label>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
 
-      <div style={{ marginTop: "2rem" }}>
+      <div style={{ marginTop: "2rem", marginLeft: "25%" }}>
         <button
           style={{
             backgroundColor: "red",
             border: "2px solid red",
             color: "gold",
             cursor: "pointer",
-            width: "100%",
+            width: "50%",
+            marginBottom: "3rem",
           }}
           onClick={handleNavigate}
         >

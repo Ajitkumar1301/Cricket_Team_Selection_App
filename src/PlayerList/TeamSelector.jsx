@@ -45,11 +45,25 @@ const TeamSelector = () => {
     <div className="team-selector-container">
       <div className="selected-players-container">
         <h3>Selected players</h3>
-        <ul>
+        <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(2, 1fr)",
+          gap: "0.5rem",
+        }}
+      >
           {selectedMembers.map((member) => (
-            <li key={member.id}>{member.name}</li>
+           <div
+           key={member.id}
+           style={{
+             display: "flex",
+             alignItems: "center",
+           }}
+         >
+          {member.name}
+          </div>
           ))}
-        </ul>
+        </div>
        <button
           className={` ${!isDisabled ? "active" : "disable"}`}
           disabled={isDisabled}
