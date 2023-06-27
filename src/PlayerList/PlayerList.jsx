@@ -11,7 +11,7 @@ const PlayerList = () => {
     { id: 6, name: "Deepak", points: 2 },
     { id: 7, name: "Giridharan", points: 2 },
     { id: 8, name: "Jeffrin", points: 2 },
-    { id: 9, name: "Jones", points: 1 },
+    { id: 9, name: "Jones", points: 0 },
     { id: 10, name: "KumarSelvam", points: 2 },
     { id: 11, name: "MuraliK", points: 3 },
     { id: 12, name: "Naveen", points: 2 },
