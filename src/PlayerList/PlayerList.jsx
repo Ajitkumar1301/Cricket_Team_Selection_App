@@ -5,7 +5,7 @@ const PlayerList = () => {
   const teamMembers = [
     { id: 1, name: "Ajith", points: 2 },
     { id: 2, name: "AproseKhan", points: 2 },
-    { id: 3, name: "Ashwathaman", points: 2 },
+    { id: 3, name: "Ashwathaman", points: 3 },
     { id: 4, name: "Chandru", points: 2 },
     { id: 5, name: "Daniel", points: 3 },
     { id: 6, name: "Deepak", points: 2 },
