@@ -32,7 +32,7 @@ const TeamSelector = () => {
     let team2Points = 0;
   
     sortedMembers.forEach((member, index) => {
-      // Check if the number of team members is odd and it's the last iteration
+   
       if (sortedMembers.length % 2 !== 0 && index === sortedMembers.length - 1) {
         setCommonColumn([member]);
       } else {
