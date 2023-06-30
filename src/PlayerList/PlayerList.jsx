@@ -58,16 +58,19 @@ const PlayerList = () => {
       <div>
         <h2>Team Members</h2>
         <div>
-            <input
-              type="checkbox"
-              checked={selectedMembers.length === teamMembers.length}
-              onChange={
-                selectedMembers.length === teamMembers.length
-                  ? handleDeselectAll
-                  : handleSelectAll
-              }
-            />
-            <label style={{fontWeight:'bolder',marginLeft:'0.3rem'}}>Select All</label></div>
+          <input
+            type="checkbox"
+            checked={selectedMembers.length === teamMembers.length}
+            onChange={
+              selectedMembers.length === teamMembers.length
+                ? handleDeselectAll
+                : handleSelectAll
+            }
+          />
+          <label style={{ fontWeight: "bolder", marginLeft: "0.3rem" }}>
+            Select All
+          </label>
+        </div>
         <div
           style={{
             display: "grid",
@@ -80,11 +83,9 @@ const PlayerList = () => {
               display: "flex",
               alignItems: "center",
               marginLeft: "1rem",
-              marginTop:'1rem'
+              marginTop: "1rem",
             }}
-          >
-           
-          </div>
+          ></div>
           {teamMembers.map((member) => (
             <div
               key={member.id}
@@ -104,22 +105,23 @@ const PlayerList = () => {
           ))}
         </div>
       </div>
-
-      <div style={{ marginTop: "2rem", marginLeft: "25%" }}>
-        <button
-          style={{
-            backgroundColor: "red",
-            border: "2px solid red",
-            color: "gold",
-            cursor: "pointer",
-            width: "50%",
-            marginBottom: "3rem",
-          }}
-          onClick={handleNavigate}
-        >
-          Team Select
-        </button>
-      </div>
+      {selectedMembers.length > 1 && (
+        <div style={{ marginTop: "2rem", marginLeft: "25%" }}>
+          <button
+            style={{
+              backgroundColor: "red",
+              border: "2px solid red",
+              color: "gold",
+              cursor: "pointer",
+              width: "50%",
+              marginBottom: "3rem",
+            }}
+            onClick={handleNavigate}
+          >
+            Team Select
+          </button>
+        </div>
+      )}
     </div>
   );
 };
