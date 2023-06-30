@@ -41,6 +41,14 @@ const PlayerList = () => {
     }
   };
 
+  const handleSelectAll = () => {
+    setSelectedMembers(teamMembers);
+  };
+
+  const handleDeselectAll = () => {
+    setSelectedMembers([]);
+  };
+
   const handleNavigate = () => {
     navigate("/team", { state: { selectedMembers: selectedMembers } });
   };
@@ -49,6 +57,17 @@ const PlayerList = () => {
     <div style={{ marginLeft: "5%", marginRight: "5%", marginTop: "2rem" }}>
       <div>
         <h2>Team Members</h2>
+        <div>
+            <input
+              type="checkbox"
+              checked={selectedMembers.length === teamMembers.length}
+              onChange={
+                selectedMembers.length === teamMembers.length
+                  ? handleDeselectAll
+                  : handleSelectAll
+              }
+            />
+            <label style={{fontWeight:'bolder',marginLeft:'0.3rem'}}>Select All</label></div>
         <div
           style={{
             display: "grid",
@@ -56,6 +75,16 @@ const PlayerList = () => {
             gap: "0.5rem",
           }}
         >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              marginLeft: "1rem",
+              marginTop:'1rem'
+            }}
+          >
+           
+          </div>
           {teamMembers.map((member) => (
             <div
               key={member.id}
