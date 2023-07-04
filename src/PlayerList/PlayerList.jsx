@@ -87,24 +87,31 @@ const PlayerList = () => {
             }}
           ></div>
           {teamMembers.map((member) => (
-            <div
-              key={member.id}
-              style={{
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <input
-                style={{ marginLeft: "1rem" }}
-                type="checkbox"
-                checked={selectedMembers.some((m) => m.id === member.id)}
-                onChange={() => handleSelectMember(member)}
-              />
-              <label>{member.name}</label>
-            </div>
-          ))}
-        </div>
-      </div>
+             <div
+             key={member.id}
+             class="checkbox-wrapper-10"
+             style={{
+               display: "flex",
+               alignItems: "center",
+             }}
+           >
+            <div>
+             <input
+               style={{ marginLeft: "1rem" }}
+               type="checkbox"
+               checked={selectedMembers.some((m) => m.id === member.id)}
+               onChange={() => handleSelectMember(member)}
+               id={`cb-${member.id}`}
+               class="tgl tgl-flip"
+             />
+             <label class="tgl-btn" htmlFor={`cb-${member.id}`} data-tg-off="OUT" data-tg-on="IN"></label>
+           </div>
+         
+             <label style={{marginLeft:'0.5rem'}}>{member.name}</label>
+             </div>
+         ))}
+       </div>
+     </div>
       {selectedMembers.length > 1 && (
         <div style={{ marginTop: "2rem", marginLeft: "25%" }}>
           <button
