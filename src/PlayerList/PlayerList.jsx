@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const PlayerList = () => {
   const teamMembers = [
     { id: 1, name: "Ajith", points: 1.5 },
-    { id: 2, name: "AproseKhan", points: 1.5 },
+    { id: 2, name: "AproseKhan", points: 2 },
     { id: 3, name: "Ashwathaman", points: 3 },
     { id: 4, name: "Chandru", points: 1.5 },
     { id: 5, name: "Daniel", points: 3 },
@@ -12,20 +12,22 @@ const PlayerList = () => {
     { id: 7, name: "Giridharan", points: 1 },
     { id: 8, name: "Jeffrin", points: 2 },
     { id: 9, name: "Jones", points: 2 },
-    { id: 10, name: "KumarSelvam", points: 1.5 },
-    { id: 11, name: "MuraliK", points: 3 },
-    { id: 12, name: "Naveen", points: 1 },
-    { id: 13, name: "Nirmal", points: 3 },
-    { id: 14, name: "Prabhakaran", points: 3 },
-    { id: 15, name: "Pravin", points: 1.5 },
-    { id: 16, name: "Sakthivel", points: 2 },
-    { id: 17, name: "Sarath", points: 3 },
-    { id: 18, name: "Selvendran", points: 3 },
-    { id: 19, name: "Sikkandar", points: 2.5 },
-    { id: 20, name: "SivaDurai", points: 2.5 },
-    { id: 21, name: "ThiruVarasan", points: 1.5 },
-    { id: 22, name: "VelMurugan", points: 3 },
-    { id: 23, name: "Vignesh", points: 1.5 },
+    { id: 10, name: "Krish", points: 3 },
+    { id: 11, name: "KumarSelvam", points: 1.5 },
+    { id: 12, name: "MuraliK", points: 3 },
+    { id: 13, name: "Naveen", points: 1 },
+    { id: 14, name: "Nirmal", points: 3 },
+    { id: 15, name: "Prabhakaran", points: 3 },
+    { id: 16, name: "Pravin", points: 1.5 },
+    { id: 17, name: "Sakthivel", points: 2.5 },
+    { id: 18, name: "Sarath", points: 3 },
+    { id: 19, name: "Sarathy", points: 3 },
+    { id: 20, name: "Selvendran", points: 3 },
+    { id: 21, name: "Sikkandar", points: 2.5 },
+    { id: 22, name: "SivaDurai", points: 2.5 },
+    { id: 23, name: "ThiruVarasan", points: 1.5 },
+    { id: 24, name: "VelMurugan", points: 3 },
+    { id: 25, name: "Vignesh", points: 1.5 },
   ];
 
   const [selectedMembers, setSelectedMembers] = useState([]);
@@ -87,31 +89,36 @@ const PlayerList = () => {
             }}
           ></div>
           {teamMembers.map((member) => (
-             <div
-             key={member.id}
-             class="checkbox-wrapper-10"
-             style={{
-               display: "flex",
-               alignItems: "center",
-             }}
-           >
-            <div>
-             <input
-               style={{ marginLeft: "1rem" }}
-               type="checkbox"
-               checked={selectedMembers.some((m) => m.id === member.id)}
-               onChange={() => handleSelectMember(member)}
-               id={`cb-${member.id}`}
-               class="tgl tgl-flip"
-             />
-             <label class="tgl-btn" htmlFor={`cb-${member.id}`} data-tg-off="OUT" data-tg-on="IN"></label>
-           </div>
-         
-             <label style={{marginLeft:'0.5rem'}}>{member.name}</label>
-             </div>
-         ))}
-       </div>
-     </div>
+            <div
+              key={member.id}
+              class="checkbox-wrapper-10"
+              style={{
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <div>
+                <input
+                  style={{ marginLeft: "1rem" }}
+                  type="checkbox"
+                  checked={selectedMembers.some((m) => m.id === member.id)}
+                  onChange={() => handleSelectMember(member)}
+                  id={`cb-${member.id}`}
+                  class="tgl tgl-flip"
+                />
+                <label
+                  class="tgl-btn"
+                  htmlFor={`cb-${member.id}`}
+                  data-tg-off="OUT"
+                  data-tg-on="IN"
+                ></label>
+              </div>
+
+              <label style={{ marginLeft: "0.5rem" }}>{member.name}</label>
+            </div>
+          ))}
+        </div>
+      </div>
       {selectedMembers.length > 1 && (
         <div style={{ marginTop: "2rem", marginLeft: "25%" }}>
           <button
