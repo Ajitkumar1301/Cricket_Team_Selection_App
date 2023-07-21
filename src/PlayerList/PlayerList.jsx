@@ -109,12 +109,12 @@ const PlayerList = () => {
                 <label
                   class="tgl-btn"
                   htmlFor={`cb-${member.id}`}
-                  data-tg-off="OUT"
-                  data-tg-on="IN"
+                  data-tg-off={member.name}
+                  data-tg-on={member.name}
                 ></label>
               </div>
 
-              <label style={{ marginLeft: "0.5rem" }}>{member.name}</label>
+              {/* <label style={{ marginLeft: "0.5rem" }}>{member.name}</label> */}
             </div>
           ))}
         </div>
