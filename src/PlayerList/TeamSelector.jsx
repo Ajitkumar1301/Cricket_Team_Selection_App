@@ -101,12 +101,18 @@ const TeamSelector = () => {
                       key={member.id}
                       style={{
                         color:
-                          shuffledIndices.indexOf(i) === 0 ? "red" : "inherit",
+                          shuffledIndices.indexOf(i) === 0
+                            ? "red"
+                            : shuffledIndices.indexOf(i) === 1
+                            ? "darkorange"
+                            : "inherit",
                       }}
                     >
                       {" "}
                       {shuffledIndices.indexOf(i) === 0
-                        ? `${member.name} (Captain)`
+                        ? `${member.name} (C)`
+                        : shuffledIndices.indexOf(i) === 1
+                        ? `${member.name} (VC)`
                         : member.name}
                     </li>
                   ))}
@@ -120,13 +126,17 @@ const TeamSelector = () => {
                       style={{
                         color:
                           shuffledIndices2.indexOf(i) === 0
-                            ? "green"
+                            ? "blue"
+                            : shuffledIndices2.indexOf(i) === 1
+                            ? "darkcyan"
                             : "inherit",
                       }}
                     >
                       {" "}
                       {shuffledIndices2.indexOf(i) === 0
-                        ? `${member.name} (Captain)`
+                        ? `${member.name} (C)`
+                        : shuffledIndices2.indexOf(i) === 1
+                        ? `${member.name} (VC)`
                         : member.name}
                     </li>
                   ))}
