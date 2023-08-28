@@ -121,6 +121,7 @@
   margin-top: 2rem;
   border-collapse: collapse;
   width: 100%;
+  font-weight: bolder;
 }
 
 .teams-table th,

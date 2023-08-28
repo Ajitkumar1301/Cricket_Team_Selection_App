@@ -27,13 +27,15 @@ const TeamSelector = () => {
     setIsDisabled(true);
     const shuffledMembers = shuffleArray(selectedMembers);
     const sortedMembers = shuffledMembers.sort((a, b) => b.points - a.points);
-  
+
     let team1Points = 0;
     let team2Points = 0;
-  
+
     sortedMembers.forEach((member, index) => {
-   
-      if (sortedMembers.length % 2 !== 0 && index === sortedMembers.length - 1) {
+      if (
+        sortedMembers.length % 2 !== 0 &&
+        index === sortedMembers.length - 1
+      ) {
         setCommonColumn([member]);
       } else {
         if (team1Points <= team2Points) {
@@ -46,7 +48,9 @@ const TeamSelector = () => {
       }
     });
   };
-  
+
+  const shuffledIndices = shuffleArray([...Array(team1Members.length).keys()]);
+  const shuffledIndices2 = shuffleArray([...Array(team2Members.length).keys()]);
 
   return (
     <div className="team-selector-container">
@@ -92,15 +96,39 @@ const TeamSelector = () => {
             <tr>
               <td style={{ textAlign: "center" }}>
                 <ul>
-                  {team1Members.map((member) => (
-                    <li key={member.id}>{member.name}</li>
+                  {team1Members.map((member, i) => (
+                    <li
+                      key={member.id}
+                      style={{
+                        color:
+                          shuffledIndices.indexOf(i) === 0 ? "red" : "inherit",
+                      }}
+                    >
+                      {" "}
+                      {shuffledIndices.indexOf(i) === 0
+                        ? `${member.name} (Captain)`
+                        : member.name}
+                    </li>
                   ))}
                 </ul>
               </td>
               <td style={{ textAlign: "center" }}>
                 <ul>
-                  {team2Members.map((member) => (
-                    <li key={member.id}>{member.name}</li>
+                  {team2Members.map((member, i) => (
+                    <li
+                      key={member.id}
+                      style={{
+                        color:
+                          shuffledIndices2.indexOf(i) === 0
+                            ? "green"
+                            : "inherit",
+                      }}
+                    >
+                      {" "}
+                      {shuffledIndices2.indexOf(i) === 0
+                        ? `${member.name} (Captain)`
+                        : member.name}
+                    </li>
                   ))}
                 </ul>
               </td>
