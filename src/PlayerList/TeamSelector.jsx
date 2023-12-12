@@ -31,11 +31,25 @@ const TeamSelector = () => {
     let team1Points = 0;
     let team2Points = 0;
 
-    sortedMembers.forEach((member, index) => {
-      if (
-        sortedMembers.length % 2 !== 0 &&
-        index === sortedMembers.length - 1
-      ) {
+    const id1And2Members = sortedMembers.filter(
+      (member) => member.id === 5 || member.id === 11
+    );
+    const otherMembers = sortedMembers.filter(
+      (member) => member.id !== 5 && member.id !== 11
+    );
+
+    id1And2Members.forEach((member) => {
+      if (team1Points <= team2Points) {
+        setTeam1Members((prevMembers) => [...prevMembers, member]);
+        team1Points += member.points;
+      } else {
+        setTeam2Members((prevMembers) => [...prevMembers, member]);
+        team2Points += member.points;
+      }
+    });
+
+    otherMembers.forEach((member, index) => {
+      if (otherMembers.length % 2 !== 0 && index === otherMembers.length - 1) {
         setCommonColumn([member]);
       } else {
         if (team1Points <= team2Points) {
