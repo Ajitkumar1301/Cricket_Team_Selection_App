@@ -110,50 +110,54 @@ const TeamSelector = () => {
             <tr>
               <td style={{ textAlign: "center" }}>
                 <ul>
-                  {team1Members.map((member, i) => (
-                    <li
-                      key={member.id}
-                      style={{
-                        color:
-                          shuffledIndices.indexOf(i) === 0
-                            ? "red"
-                            : shuffledIndices.indexOf(i) === 1
-                            ? "darkorange"
-                            : "inherit",
-                      }}
-                    >
-                      {" "}
-                      {shuffledIndices.indexOf(i) === 0
-                        ? `${member.name} (C)`
-                        : shuffledIndices.indexOf(i) === 1
-                        ? `${member.name} (VC)`
-                        : member.name}
-                    </li>
-                  ))}
+                  {team1Members
+                    .sort((a, b) => b.name.localeCompare(a.name))
+                    .map((member, i) => (
+                      <li
+                        key={member.id}
+                        style={{
+                          color:
+                            shuffledIndices.indexOf(i) === 0
+                              ? "red"
+                              : shuffledIndices.indexOf(i) === 1
+                              ? "darkorange"
+                              : "inherit",
+                        }}
+                      >
+                        {" "}
+                        {shuffledIndices.indexOf(i) === 0
+                          ? `${member.name} (C)`
+                          : shuffledIndices.indexOf(i) === 1
+                          ? `${member.name} (VC)`
+                          : member.name}
+                      </li>
+                    ))}
                 </ul>
               </td>
               <td style={{ textAlign: "center" }}>
                 <ul>
-                  {team2Members.map((member, i) => (
-                    <li
-                      key={member.id}
-                      style={{
-                        color:
-                          shuffledIndices2.indexOf(i) === 0
-                            ? "blue"
-                            : shuffledIndices2.indexOf(i) === 1
-                            ? "darkcyan"
-                            : "inherit",
-                      }}
-                    >
-                      {" "}
-                      {shuffledIndices2.indexOf(i) === 0
-                        ? `${member.name} (C)`
-                        : shuffledIndices2.indexOf(i) === 1
-                        ? `${member.name} (VC)`
-                        : member.name}
-                    </li>
-                  ))}
+                  {team2Members
+                    .sort((a, b) => b.name.localeCompare(a.name))
+                    .map((member, i) => (
+                      <li
+                        key={member.id}
+                        style={{
+                          color:
+                            shuffledIndices2.indexOf(i) === 0
+                              ? "blue"
+                              : shuffledIndices2.indexOf(i) === 1
+                              ? "darkcyan"
+                              : "inherit",
+                        }}
+                      >
+                        {" "}
+                        {shuffledIndices2.indexOf(i) === 0
+                          ? `${member.name} (C)`
+                          : shuffledIndices2.indexOf(i) === 1
+                          ? `${member.name} (VC)`
+                          : member.name}
+                      </li>
+                    ))}
                 </ul>
               </td>
               {commonColumn.length > 0 && (
