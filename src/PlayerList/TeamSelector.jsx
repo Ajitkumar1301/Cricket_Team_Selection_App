@@ -32,10 +32,10 @@ const TeamSelector = () => {
     let team2Points = 0;
 
     const id1And2Members = sortedMembers.filter(
-      (member) => member.id === 5 || member.id === 11
+      (member) => member.id === 5 || member.id === 10
     );
     const otherMembers = sortedMembers.filter(
-      (member) => member.id !== 5 && member.id !== 11
+      (member) => member.id !== 5 && member.id !== 10
     );
 
     id1And2Members.forEach((member) => {
