@@ -22,6 +22,7 @@ const PlayerList = () => {
     { id: 17, name: "Tamil", points: 1 },
     { id: 18, name: "ThiruVarasan", points: 3 },
     { id: 19, name: "VelMurugan", points: 4 },
+    { id: 20, name: "zzzzzz", points: 4 }
   ];
 
   const [selectedMembers, setSelectedMembers] = useState([]);
