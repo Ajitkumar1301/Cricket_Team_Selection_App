@@ -24,24 +24,35 @@ const TeamSelector = () => {
     let team2Points = 0;
 
     const id1And2Members = sortedMembers.filter(
-      (member) => member.id === 5 || member.id === 8
+      (member) => member.id === 5 || member.id === 8 || member.id === 1
     );
     const otherMembers = sortedMembers.filter(
-      (member) => member.id !== 5 && member.id !== 8
+      (member) => member.id !== 5 && member.id !== 8 && member.id !== 1
     );
 
     id1And2Members.forEach((member) => {
+
       if (team1Points <= team2Points) {
-        setTeam1Members((prevMembers) => [...prevMembers, member]);
-        team1Points += member.points;
-      } else {
+        if (member.id === 1 || member.id === 8) {
+          setTeam2Members((prevMembers) => [...prevMembers, member]);
+          team2Points += member.points;
+        }
+        else if (member.id === 5) {
+
+          setTeam1Members((prevMembers) => [...prevMembers, member]);
+          team1Points += member.points;
+        }
+      }
+      else {
+
         setTeam2Members((prevMembers) => [...prevMembers, member]);
         team2Points += member.points;
       }
     });
 
     otherMembers.forEach((member, index) => {
-      if (otherMembers.length % 2 !== 0 && index === otherMembers.length - 1) {
+
+      if (otherMembers.length % 2 !== 1 && index === otherMembers.length - 1) {
         setCommonColumn([member]);
       } else {
         if (team1Points <= team2Points) {
@@ -52,8 +63,12 @@ const TeamSelector = () => {
           team2Points += member.points;
         }
       }
+
     });
+
   };
+
+
 
   const shuffledIndices = shuffleArray([...Array(team1Members.length).keys()]);
   const shuffledIndices2 = shuffleArray([...Array(team2Members.length).keys()]);
