@@ -52,7 +52,7 @@ const TeamSelector = () => {
 
     otherMembers.forEach((member, index) => {
 
-      if (otherMembers.length % 2 !== 1 && index === otherMembers.length - 1) {
+      if (id1And2Members.length % 2 !== 0 ? (otherMembers.length % 2 !== 1 && index === otherMembers.length - 1) : (otherMembers.length % 2 !== 0 && index === otherMembers.length - 1)) {
         setCommonColumn([member]);
       } else {
         if (team1Points <= team2Points) {
