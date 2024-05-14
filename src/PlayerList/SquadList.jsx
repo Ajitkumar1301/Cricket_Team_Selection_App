@@ -1,22 +1,10 @@
-import { useState } from 'react';
 import teamALogo from '../assets/logo.jpeg';
 import teamBLogo from '../assets/logob.jpeg';
 import vsLogo from '../assets/vsimage.jpeg';
 import { useLocation } from 'react-router-dom';
 
 const SquadList = () => {
-    const [show, setShow] = useState(true);
 
-    const blocks = [
-        { id: 1, name: 'Name 1' },
-        { id: 2, name: 'Name 2' },
-        { id: 3, name: 'Name 3' },
-        { id: 4, name: 'Name 1' },
-        { id: 5, name: 'Name 2' },
-        { id: 6, name: 'Name 3' },
-
-
-    ];
 
     const Members = useLocation();
 

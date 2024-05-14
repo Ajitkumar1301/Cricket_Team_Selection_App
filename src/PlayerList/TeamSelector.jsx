@@ -96,8 +96,8 @@ const TeamSelector = () => {
   };
 
 
-  const shuffledIndices = shuffleArray([...Array(team1Members.length).keys()]);
-  const shuffledIndices2 = shuffleArray([...Array(team2Members.length).keys()]);
+  // const shuffledIndices = shuffleArray([...Array(team1Members.length).keys()]);
+  // const shuffledIndices2 = shuffleArray([...Array(team2Members.length).keys()]);
 
   return (
     <div className="team-selector-container">
