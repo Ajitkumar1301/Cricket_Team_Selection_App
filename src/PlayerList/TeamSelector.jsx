@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "../App.css";
 
 const TeamSelector = () => {
@@ -9,6 +9,7 @@ const TeamSelector = () => {
   const [commonColumn, setCommonColumn] = useState([]);
 
   const Members = useLocation();
+  const navigate = useNavigate();
   const selectedMembers = Members.state.selectedMembers;
 
   function shuffleArray(array) {
@@ -23,36 +24,10 @@ const TeamSelector = () => {
     let team1Points = 0;
     let team2Points = 0;
 
-    const id1And2Members = sortedMembers.filter(
-      (member) => member.id === 5 || member.id === 8 || member.id === 1
-    );
-    const otherMembers = sortedMembers.filter(
-      (member) => member.id !== 5 && member.id !== 8 && member.id !== 1
-    );
 
-    id1And2Members.forEach((member) => {
+    sortedMembers.forEach((member, index) => {
 
-      if (team1Points <= team2Points) {
-        if (member.id === 1 || member.id === 8) {
-          setTeam2Members((prevMembers) => [...prevMembers, member]);
-          team2Points += member.points;
-        }
-        else if (member.id === 5) {
-
-          setTeam1Members((prevMembers) => [...prevMembers, member]);
-          team1Points += member.points;
-        }
-      }
-      else {
-
-        setTeam2Members((prevMembers) => [...prevMembers, member]);
-        team2Points += member.points;
-      }
-    });
-
-    otherMembers.forEach((member, index) => {
-
-      if (id1And2Members.length % 2 !== 0 ? (otherMembers.length % 2 !== 1 && index === otherMembers.length - 1) : (otherMembers.length % 2 !== 0 && index === otherMembers.length - 1)) {
+      if (sortedMembers.length % 2 !== 0 && index === sortedMembers.length - 1) {
         setCommonColumn([member]);
       } else {
         if (team1Points <= team2Points) {
@@ -63,11 +38,62 @@ const TeamSelector = () => {
           team2Points += member.points;
         }
       }
-
     });
+    // const id1And2Members = sortedMembers.filter(
+    //   (member) => member.id === 5 || member.id === 8 || member.id === 1
+    // );
+    // const otherMembers = sortedMembers.filter(
+    //   (member) => member.id !== 5 && member.id !== 8 && member.id !== 1
+    // );
+
+    // id1And2Members.forEach((member) => {
+
+    //   if (team1Points <= team2Points) {
+    //     if (member.id === 1 || member.id === 8) {
+    //       setTeam2Members((prevMembers) => [...prevMembers, member]);
+    //       team2Points += member.points;
+    //     }
+    //     else if (member.id === 5) {
+
+    //       setTeam1Members((prevMembers) => [...prevMembers, member]);
+    //       team1Points += member.points;
+    //     }
+    //   }
+    //   else {
+
+    //     setTeam2Members((prevMembers) => [...prevMembers, member]);
+    //     team2Points += member.points;
+    //   }
+    // });
+
+    // otherMembers.forEach((member, index) => {
+
+    //   if (id1And2Members.length % 2 !== 0 ? (otherMembers.length % 2 !== 1 && index === otherMembers.length - 1) : (otherMembers.length % 2 !== 0 && index === otherMembers.length - 1)) {
+    //     setCommonColumn([member]);
+    //   } else {
+    //     if (team1Points <= team2Points) {
+    //       setTeam1Members((prevMembers) => [...prevMembers, member]);
+    //       team1Points += member.points;
+    //     } else {
+    //       setTeam2Members((prevMembers) => [...prevMembers, member]);
+    //       team2Points += member.points;
+    //     }
+    //   }
+
+    // });
 
   };
 
+
+  const NextPage = () => {
+    navigate("/final", {
+      state: {
+        teamA: team1Members,
+        teamB: team2Members,
+        impact: commonColumn
+      }
+    });
+  };
 
 
   const shuffledIndices = shuffleArray([...Array(team1Members.length).keys()]);
@@ -103,89 +129,16 @@ const TeamSelector = () => {
         >
           Assign Players
         </button>
+        {isDisabled &&
+          <button
+            className="active"
+            style={{ marginLeft: '2rem' }}
+            onClick={NextPage}
+          >
+            View Squad
+          </button>}
       </div>
-      <table className="teams-table">
-        <thead>
-          <tr>
-            <th>Team 1</th>
-            <th>Team 2</th>
-            {commonColumn.length > 0 && <th>Common</th>}
-          </tr>
-        </thead>
-        <tbody>
-          {team1Members.length > 0 || team2Members.length > 0 ? (
-            <tr>
-              <td style={{ textAlign: "center" }}>
-                <ul>
-                  {team1Members
-                    .sort((a, b) => b.name.localeCompare(a.name))
-                    .map((member, i) => (
-                      <li
-                        key={member.id}
-                        style={{
-                          color:
-                            shuffledIndices.indexOf(i) === 0
-                              ? "red"
-                              : shuffledIndices.indexOf(i) === 1
-                                ? "darkorange"
-                                : "inherit",
-                        }}
-                      >
-                        {" "}
-                        {shuffledIndices.indexOf(i) === 0
-                          ? `${member.name} (C)`
-                          : shuffledIndices.indexOf(i) === 1
-                            ? `${member.name} (VC)`
-                            : member.name}
-                      </li>
-                    ))}
-                </ul>
-              </td>
-              <td style={{ textAlign: "center" }}>
-                <ul>
-                  {team2Members
-                    .sort((a, b) => b.name.localeCompare(a.name))
-                    .map((member, i) => (
-                      <li
-                        key={member.id}
-                        style={{
-                          color:
-                            shuffledIndices2.indexOf(i) === 0
-                              ? "blue"
-                              : shuffledIndices2.indexOf(i) === 1
-                                ? "darkcyan"
-                                : "inherit",
-                        }}
-                      >
-                        {" "}
-                        {shuffledIndices2.indexOf(i) === 0
-                          ? `${member.name} (C)`
-                          : shuffledIndices2.indexOf(i) === 1
-                            ? `${member.name} (VC)`
-                            : member.name}
-                      </li>
-                    ))}
-                </ul>
-              </td>
-              {commonColumn.length > 0 && (
-                <td style={{ textAlign: "center" }}>
-                  <ul>
-                    {commonColumn.map((member) => (
-                      <li key={member.id}>{member.name}</li>
-                    ))}
-                  </ul>
-                </td>
-              )}
-            </tr>
-          ) : (
-            <tr>
-              <td colSpan={commonColumn.length > 0 ? "3" : "2"}>
-                Teams will be assigned once players are selected and assigned
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+
     </div>
   );
 };
