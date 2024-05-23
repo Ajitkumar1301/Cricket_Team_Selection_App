@@ -23,52 +23,13 @@ const TeamSelector = () => {
 
     let team1Points = 0;
     let team2Points = 0;
+    const team1Members = [];
+    const team2Members = [];
+    let commonColumnMember = null;
 
+    // sortedMembers.forEach((member, index) => {
 
-    sortedMembers.forEach((member, index) => {
-
-      if (sortedMembers.length % 2 !== 0 && index === sortedMembers.length - 1) {
-        setCommonColumn([member]);
-      } else {
-        if (team1Points <= team2Points) {
-          setTeam1Members((prevMembers) => [...prevMembers, member]);
-          team1Points += member.points;
-        } else {
-          setTeam2Members((prevMembers) => [...prevMembers, member]);
-          team2Points += member.points;
-        }
-      }
-    });
-    // const id1And2Members = sortedMembers.filter(
-    //   (member) => member.id === 5 || member.id === 8 || member.id === 1
-    // );
-    // const otherMembers = sortedMembers.filter(
-    //   (member) => member.id !== 5 && member.id !== 8 && member.id !== 1
-    // );
-
-    // id1And2Members.forEach((member) => {
-
-    //   if (team1Points <= team2Points) {
-    //     if (member.id === 1 || member.id === 8) {
-    //       setTeam2Members((prevMembers) => [...prevMembers, member]);
-    //       team2Points += member.points;
-    //     }
-    //     else if (member.id === 5) {
-
-    //       setTeam1Members((prevMembers) => [...prevMembers, member]);
-    //       team1Points += member.points;
-    //     }
-    //   }
-    //   else {
-
-    //     setTeam2Members((prevMembers) => [...prevMembers, member]);
-    //     team2Points += member.points;
-    //   }
-    // });
-
-    // otherMembers.forEach((member, index) => {
-
-    //   if (id1And2Members.length % 2 !== 0 ? (otherMembers.length % 2 !== 1 && index === otherMembers.length - 1) : (otherMembers.length % 2 !== 0 && index === otherMembers.length - 1)) {
+    //   if (sortedMembers.length % 2 !== 0 && index === sortedMembers.length - 1) {
     //     setCommonColumn([member]);
     //   } else {
     //     if (team1Points <= team2Points) {
@@ -79,11 +40,69 @@ const TeamSelector = () => {
     //       team2Points += member.points;
     //     }
     //   }
-
     // });
+
+    const id1And2Members = sortedMembers.filter(member =>
+      [1, 5, 8].includes(member.id)
+    );
+    const otherMembers = sortedMembers.filter(member =>
+      ![1, 5, 8].includes(member.id)
+    );
+
+
+
+    id1And2Members.forEach((member) => {
+
+
+      if (member.id === 1 || member.id === 8) {
+        team2Members.push(member);
+        team2Points += member.points;
+      } else if (member.id === 5) {
+        team1Members.push(member);
+        team1Points += member.points;
+      }
+
+    });
+
+    const targetNumMembersPerTeam = Math.floor((otherMembers.length + id1And2Members.length) / 2);
+
+    otherMembers.forEach((member, index) => {
+      console.log({targetNumMembersPerTeam});
+      if (team1Members.length < targetNumMembersPerTeam) {
+        team1Members.push(member);
+      } else {
+        team2Members.push(member);
+      }
+      if (team1Members.length !== team2Members.length && index === otherMembers.length - 1) {
+        commonColumnMember = member;
+        console.log(commonColumnMember.id);
+
+        if (team1Members.some(member => member.id === setCommonColumn?.id)) {
+          const index = team1Members.findIndex(member => member.id === setCommonColumn?.id);
+          team1Members.splice(index, 1);
+        } else if (team2Members.some(member => member.id === setCommonColumn?.id)) {
+          const index = team2Members.findIndex(member => member.id === setCommonColumn?.id);
+          team2Members.splice(index, 1);
+        }
+      }
+
+
+
+    });
+    const TeamA = team1Members.filter(member =>
+      ![commonColumnMember?.id].includes(member.id)
+    );
+    const TeamB = team2Members.filter(member =>
+      ![commonColumnMember?.id].includes(member.id)
+    );
+
+    setTeam1Members(TeamA);
+    setTeam2Members(TeamB);
+    setCommonColumn(commonColumnMember ? [commonColumnMember] : []);
 
   };
 
+  console.log({ team1Members, team2Members, commonColumn });
 
   const NextPage = () => {
     navigate("/final", {

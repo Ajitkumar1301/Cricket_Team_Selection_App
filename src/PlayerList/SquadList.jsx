@@ -9,8 +9,8 @@ const SquadList = () => {
     const Members = useLocation();
 
     console.log(Members);
-    const teamAMember = (Members.state.teamA).sort((a, b) => b.name - a.name);
-    const teamBMember = Members.state.teamB;
+    const teamAMember = Members.state.teamA.slice().sort((a, b) => b.name.localeCompare(a.name));
+    const teamBMember = Members.state.teamB.slice().sort((a, b) => a.name.localeCompare(b.name));
     const Impact = Members.state.impact;
     return (
         <div className='container'>
